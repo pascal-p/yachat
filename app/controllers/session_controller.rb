@@ -1,4 +1,5 @@
 class SessionController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_user, only: [:create]
 
   def new
@@ -17,7 +18,7 @@ class SessionController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy   # @current_user session
     if logged_in?
       log_out
       flash[:info] = "Log out successful"

@@ -1,0 +1,29 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to ENV['MY_APP_NAME'], '#', id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li><%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %></li>
+          <li><%= link_to "Home", root_path, class: "glyphicon glyphicon-home" %></li>        
+        <% end %>
+        <!-- <li>< % = link_to "Help",   '#' %></li> -->
+
+        <!-- 
+        <% if current_user %>
+          <li>< %= link_to 'Users', users_path, class: "glyphicon" %></li>
+          <li>< %= link_to('Log out', logout_path,
+                          method: :delete, class: "glyphicon glyphicon-log-out") %></li>
+        < % else %>
+          < % if request.original_url == login_url %>
+            <li>< %= link_to 'Sign up', signup_path, class: "glyphicon" %></li>
+          < % end %>
+          < % if request.original_url == signup_url %>
+            <li>< %= link_to 'Log in', login_path, class: "glyphicon glyphicon-log-in" %></li>
+          < % end %>
+        <% end %>
+        --> 
+      </ul>
+    </nav>
+  </div>
+</header>

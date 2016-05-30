@@ -9,6 +9,17 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/header' %>
+    
+    <div class="container-fluid">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>     
+
+      <div class="clear"><hr/></div>
+      
+      <%= yield %>
+    </div>
+    
   </body>
 </html>

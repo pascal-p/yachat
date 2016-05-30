@@ -5,7 +5,7 @@
     <%= render 'shared/error_messages', object: f.object %>
     
     <div class="form-group">
-      <%= f.label :username, class: "control-label col-md-1 col-sm-1"  %>
+      <%= f.label :username, class: "control-label col-md-1 col-sm-1", hint: "enter username" %>
       <div class="col-md-11 col-sm-11">
         <%= f.text_field :username, autofocus: true  %>
       </div>
@@ -14,10 +14,11 @@
     <div class="form-group">
       <div class="col-md-offset-1 col-md-11 col-sm-offset-1 col-md-11">
         <%= f.submit "Sign up", class: 'btn btn-sm btn-primary' %>
+        
+        <%= link_to "Log in", login_path, class: 'btn btn-sm btn-default' %><br />
       </div>
     </div>
   <% end %>
-  
-  <!-- < %= link_to "Log in", new_session_path(resource_name) %><br /> -->
+
 </div>
   

@@ -1,4 +1,4 @@
-module SessionsHelper
+module SessionHelper
 
   # Accessing the "session object"
   
@@ -23,7 +23,7 @@ module SessionsHelper
   
   # Logs out the current user.
   def log_out
-    forget(current_user)
+    # forget(current_user) # TODO
     session.delete(:user_id)
     @current_user = nil
   end

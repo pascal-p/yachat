@@ -1,7 +1,7 @@
 module SessionHelper
 
   # Accessing the "session object"
-  
+
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
@@ -19,24 +19,26 @@ module SessionHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
-  end    
-  
+  end
+
   # Logs out the current user.
   def log_out
-    # forget(current_user) # TODO
+    forget(current_user) # TODO
     session.delete(:user_id)
     @current_user = nil
   end
-  
+
   # Returns the current logged-in user (if any).
   def current_user
+    @current_user unless @current_user.nil?
+    #
     if (user_id = session[:user_id]) # return nil is no :user_id defined in session
       # temp. session
-      @current_user ||= User.find_by(id: user_id)
+      @current_user ||= User.find(user_id) # User.find_by(id: user_id)
       #
     elsif (user_id = cookies.signed[:user_id])
       # "remember-me" session
-      user = User.find_by(id: user_id)
+      user = User.find(user_id) # User.find_by(id: user_id)
       if user && user.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @current_user = user

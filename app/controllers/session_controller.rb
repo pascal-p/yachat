@@ -9,7 +9,7 @@ class SessionController < ApplicationController
   def create
     if @user
       log_in @user
-      # params[:remember_me] == '1' ? remember(@user) : forget(@user) # TODO
+      user_params[:remember_me] == '1' ? remember(@user) : forget(@user) # TODO
       flash[:info] = "Log in successful"
       redirect_to root_path
     else
@@ -18,7 +18,8 @@ class SessionController < ApplicationController
     end
   end
 
-  def destroy   # @current_user session
+  # apply to @current_user session
+  def destroy   
     if logged_in?
       log_out
       flash[:info] = "Log out successful"
@@ -28,10 +29,10 @@ class SessionController < ApplicationController
 
   private
   def set_user
-    @user = User.find_by(user_params)
+    @user = User.find_by(username: user_params[:username].capitalize)
   end
 
   def user_params
-    params.required(:user).permit(:username)
+    params.required(:user).permit(:username, :remember_me)
   end
 end

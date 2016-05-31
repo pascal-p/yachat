@@ -1,5 +1,6 @@
-class SessionController < ApplicationController
-  skip_before_action :authenticate_user!
+class SessionsController < ApplicationController
+  skip_before_action :authenticate_user!, except: :logout
+
   before_action :set_user, only: [:create]
 
   def new
@@ -7,11 +8,12 @@ class SessionController < ApplicationController
   end
 
   def create
+    # set_user
     if @user
       log_in @user
       user_params[:remember_me] == '1' ? remember(@user) : forget(@user) # TODO
       flash[:info] = "Log in successful"
-      redirect_to root_path
+      redirect_to chatrooms_path
     else
       flash[:warning] = 'Could not find your username'
       redirect_to signup_url
@@ -19,7 +21,7 @@ class SessionController < ApplicationController
   end
 
   # apply to @current_user session
-  def destroy   
+  def destroy
     if logged_in?
       log_out
       flash[:info] = "Log out successful"

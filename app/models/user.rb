@@ -48,7 +48,7 @@ class User < ApplicationRecord
   end
 
   private
-  def normalize_username
+  def normalize_username!
     self.username.capitalize!
   end
   

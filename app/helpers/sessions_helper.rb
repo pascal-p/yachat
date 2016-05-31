@@ -1,4 +1,4 @@
-module SessionHelper
+module SessionsHelper
 
   # Accessing the "session object"
 

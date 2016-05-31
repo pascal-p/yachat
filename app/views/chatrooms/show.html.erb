@@ -12,9 +12,7 @@
     <%end%>
   </div>
 
-  <% if @chatroom.messages.any? %>
-    <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
-  <% end %>
+  <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
 
   <%= link_to "Back", :back, class: 'btn btn-sm btn-default' %>
 </div>

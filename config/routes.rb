@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'registration#create'
 
   resources :chatrooms, param: :slug, except: [:destroy]
-  # resources :chatrooms, except: [:destroy]
+  resources :messages, only: :create
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

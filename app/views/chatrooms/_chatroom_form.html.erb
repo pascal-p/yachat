@@ -1,20 +1,18 @@
-<h2>Create a chatroom</h2>
-
 <div class="row">
-  <%= form_for(chatroom, class: "form-horizontal", remote: true) do |f| %>
+  <%= form_for(chatroom, html: { class: "form-horizontal" }, remote: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <div class="form-group">
-      <%= f.label :topic, class: "control-label col-md-1 col-sm-1" %>
-      <div class="col-md-11 col-sm-11">
-        <%= f.text_field :topic, autofocus: true  %>
+    <div class="form-group row">
+      <%= f.label :topic, class: "control-label col-md-1 col-md-offset-3" %>
+      <div class="col-md-5">
+        <%= f.text_field :topic, autofocus: true, placeholder: "New Topic" %>
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="col-md-offset-1 col-md-11 col-sm-offset-1 col-md-11">
-        <%= f.submit "Create a chatroom", class: 'btn btn-sm btn-primary' %>
-        <%= f.button :reset, type: :reset, class: "btn btn-sm btn-default" %>
+    <div class="form-group row">
+      <div class="col-md-offset-4 col-md-5">
+        <%= f.submit "Create chatroom", class: 'btn btn-sm btn-primary' %>
+        <%= f.button :Reset, type: :reset, class: "btn btn-sm btn-default" %>
       </div>
     </div>
   <% end %>

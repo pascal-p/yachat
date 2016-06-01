@@ -1,21 +1,22 @@
-<div class="row">
-  <%= form_for message, remote: true, authenticity_token: true do |f| %>
+<%= form_for(message, html: { class: "form-horizontal" }, remote: true, authenticity_token: true) do |f| %>
 
-    <div class="form-group">
-      <%= f.label :your_message, class: "control-label col-md-1 col-sm-1" %>
-      <div class="col-md-11 col-sm-11">
-        <%= f.text_area :content, class: "form-control", data: {textarea: "message"}%>
+  <div class="form-group">
+    <%= f.label :message, class: "control-label col-md-1 col-sm-1 pull-left" %>
+    <div class="col-md-11 col-sm-10">
+      <%= f.text_area :content, class: "form-control", data: {textarea: "message"}, placeholder: "Your message here..." %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :chatroom_id, value: chatroom.id %>
+
+  <div class="form-group">
+    <div class="col-md-11 col-md-offset-1 col-sm-10 col-sm-offset-2">
+      <%= f.submit("Send message", class: "btn btn-sm btn-primary",
+                   style: "display: none", data: {send: "message"}) %>
+      <%= f.button :Reset, type: :reset, class: "btn btn-sm btn-default" %>
+      <div class="pull-right">
+        <%= link_to "Back", :back, class: 'btn btn-sm btn-default' %>
       </div>
     </div>
-
-    <%= f.hidden_field :chatroom_id, value: chatroom.id %>
-
-    <div class="form-group">
-      <div class="col-md-offset-1 col-md-11 col-sm-offset-1 col-md-11">
-        <!-- < %= f.submit "Send message", class: 'btn btn-sm btn-primary' %> -->
-        <%= f.submit("Send message", class: "btn btn-sm btn-primary",
-                     style: "display: none", data: {send: "message"}) %>
-        <%= f.button :reset, type: :reset, class: "btn btn-sm btn-default" %>
-      </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

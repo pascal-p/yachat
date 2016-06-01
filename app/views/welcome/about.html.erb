@@ -1,14 +1,16 @@
+<% provide(:title, 'Welcome') %>
+
 <div class="jumbotron">
   <h1>Welcome to <%= ENV['MY_APP_NAME'] %></h1>
 
   <p>A Rails 5 + Action Cable example app</p>
-  
+
   <%if current_user%>
     <p><span class="glyphicon glyphicon-heart"></span> Happy to see you, <%= current_user.username%> <span class="glyphicon glyphicon-heart"></span></p>
   <%end%>
-  
+
   <% unless current_user %>
     <p>Please use "Sign up" or "Log in" link above, then create a chatroom or browse existing rooms to start chatting.</p>
   <% end %>
-  
+
 </div>

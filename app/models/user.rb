@@ -9,7 +9,9 @@ class User < ApplicationRecord
   # remember_token (clear) and remember_digest (enrypted and persisted in the DB)
 
   before_save :normalize_username!
-  
+
+  scope :excluding_archived, ->() { where(archived_at: nil) }
+
   class << self
     #
     # Returns the hash digest of the given string.
@@ -47,9 +49,21 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token) # (1)
   end
 
+  def archived?
+    !!self.archived_at.nil?
+  end
+
+  def archive
+    self.update!(archived_at: Time.now)
+  end
+
+  def active_for_authentication?
+    super && archived_at.nil?
+  end
+
   private
   def normalize_username!
     self.username.capitalize!
   end
-  
+
 end

@@ -1,11 +1,10 @@
-<div class="row col-md-8 col-md-offset-2" id="chatroom-title">
-  <h1 class="h3">Chatrooms</h1>
-</div>
+<% provide(:title, 'Chatrooms') %>
+<header>
+  <h2>Chatrooms</h2>
+</header>
 
-<div class="row col-md-8 col-md-offset-2" id="chatrooms">
-
-  <div id="chatroom-errors">
-  </div>
+<div class="row col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-1" id="chatrooms">
+  <div id="chatroom-errors"> </div>
 
   <%= render partial: 'chatroom_form', locals: {chatroom: @chatroom} %>
   <hr />
@@ -16,6 +15,7 @@
       <%= render @chatrooms %>
     <% else %>
   </ul>
-  <p> Be the first one to make a chatroom! </p>
+  <p> Create the first chatroom </p>
     <% end %>
+
 </div>

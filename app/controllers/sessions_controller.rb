@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # set_user
     if @user
       log_in @user
       user_params[:remember_me] == '1' ? remember(@user) : forget(@user) # TODO
@@ -31,7 +30,7 @@ class SessionsController < ApplicationController
 
   private
   def set_user
-    @user = User.find_by(username: user_params[:username].capitalize)
+    @user = User.excluding_archived.find_by(username: user_params[:username].capitalize)
   end
 
   def user_params

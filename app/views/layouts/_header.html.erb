@@ -1,27 +1,46 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
-    <%= link_to ENV['MY_APP_NAME'], '#', id: "logo" %>
-    <nav>
+
+    <div class="navbar-header">
+      <%= link_to ENV['MY_APP_NAME'], '#', id: "logo", class: 'navbar-brand' %>
+
+      <button type="button" class="navbar-toggle collapsed"
+              data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+
+    <nav class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <li class="navbar-text"><%= current_user.username || 'Anonymous' %> </li>
-          <li> <%= link_to 'Chatrooms', chatrooms_path %></li>
-          <li> <%= link_to "Home", root_path, class: "glyphicon glyphicon-home" %></li>
-        <% end %>
-        <!-- <li>< % = link_to "Help",   '#' %></li> -->
+          <li class="navbar-text label label-default">
+            <span class="glyphicon glyphicon-user"> <%= current_user.username || 'Anonymous' %></span>
+          </li>
 
-        <% if current_user %>
-          <li><%= link_to('Log out', logout_path,
-                          method: :delete, class: "glyphicon glyphicon-log-out") %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle glyphicon" data-toggle="dropdown">
+              Links <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <%= link_chatrooms %>
+              <!-- < %= link_help %> -->
+              <%= link_about %>
+              <%= link_home %>
+              <%= link_profile %>
+            </ul>
+          </li>
+          <%= link_logout %>
+        <% elsif request.original_url == login_url %>
+          <%= link_signup %>
+        <% elsif request.original_url == signup_url %>
+          <%= link_login %>
         <% else %>
-          <% if request.original_url == login_url %>
-            <li><%= link_to 'Sign up', signup_path, class: "glyphicon" %></li>
-          <% elsif request.original_url == signup_url %>
-            <li><%= link_to 'Log in', login_path, class: "glyphicon glyphicon-log-in" %></li>
-          <% else %>
-            <li><%= link_to 'Sign up', signup_path, class: "glyphicon" %></li>
-            <li><%= link_to 'Log in', login_path, class: "glyphicon glyphicon-log-in" %></li>
-          <% end %>
+          <%= link_signup %>
+          <%= link_login %>
         <% end %>
       </ul>
     </nav>

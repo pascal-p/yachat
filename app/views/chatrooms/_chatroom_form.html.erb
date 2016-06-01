@@ -1,7 +1,7 @@
 <h2>Create a chatroom</h2>
 
 <div class="row">
-  <%= form_for(chatroom, class: "form-horizontal") do |f| %> <!-- remote: true -->
+  <%= form_for(chatroom, class: "form-horizontal", remote: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
     <div class="form-group">
